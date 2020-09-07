@@ -1,2 +1,7 @@
 # Project exclude paths
 /node_modules/
+/.idea/codeStyles/codeStyleConfig.xml
+/.idea/modules.xml
+/.idea/otus_final_project.iml
+/.idea/workspace.xml
+/.idea/vcs.xml
