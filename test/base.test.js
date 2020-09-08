@@ -23,21 +23,17 @@ describe('online bank test', () => {
 
     test('statement test', async () => {
         await page.mouse.move(130, 115);
-        await page.waitForSelector('//a[text()=\'Выписка\']');
-        await page.click('//a[text()=\'Выписка\']');
+        await utils.click(page, '//a[text()=\'Выписка\']')
         await page.waitForSelector('#statement-page');
         await page.click('//a[text()=\'Прошлый месяц\']');
-        await page.waitForSelector('#query-button');
-        await page.click('#query-button');
+        await utils.click(page, '#query-button')
         await page.waitForSelector('.statement-container');
     });
 
     test('payment test', async () => {
         await page.click('#payments');
-        await page.waitForSelector('[title=\'За мобильный жены\']');
-        await page.click('[title=\'За мобильный жены\']');
-        await page.waitForSelector('.input-small.amount');
-        await page.fill('.input-small.amount', '500');
+        await utils.click(page, '[title=\'За мобильный жены\']')
+        await utils.fill(page, '.input-small.amount', '500')
         expect('50.00 ₽').toEqual(await utils.getText(page, 'span#fee-amount'));
     });
 });
