@@ -1,5 +1,5 @@
 const { chromium } = require('playwright');
-const utils = require('../src/utils');
+const utils = require('../../src/utils');
 
 describe('online bank test', () => {
 
