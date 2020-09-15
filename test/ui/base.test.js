@@ -7,7 +7,7 @@ describe('online bank test', () => {
     let browser;
 
     beforeEach(async () => {
-        browser = await chromium.launch({headless : false, slowMo : 100});
+        browser = await chromium.launch();
         page = await browser.newPage();
         await page.goto('https://idemo.bspb.ru/');
         await page.waitForSelector('#login-button');
