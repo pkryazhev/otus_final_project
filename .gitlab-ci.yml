@@ -7,3 +7,11 @@ tests:
   script:
     - npm install # This should install playwright
     - npm run test
+  artifacts:
+    when: always
+    paths:
+      - ./junit.xml
+    expire_in: 1 week
+    reports:
+      junit:
+        - ./junit.xml

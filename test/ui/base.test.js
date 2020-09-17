@@ -19,7 +19,6 @@ describe('online bank test', () => {
 
     afterEach(async () =>{
         const screenshotBuffer = await page.screenshot();
-        reporter.addAttachment("Screenshot", screenshotBuffer, "image/png");
         await browser.close();
     });
 
