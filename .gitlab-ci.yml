@@ -12,6 +12,7 @@ tests:
     when: always
     paths:
       - ./junit.xml
+      - ./allure-results
     expire_in: 1 week
     reports:
       junit:
