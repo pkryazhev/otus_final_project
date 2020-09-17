@@ -1,5 +1,6 @@
 stages:
   - test
+  - reports
 
 tests:
   stage: test
@@ -15,3 +16,15 @@ tests:
     reports:
       junit:
         - ./junit.xml
+
+allure_job:
+  stage: reports
+  image: frankescobar/allure-docker-service
+  script:
+    - allure generate -c ./allure-results -o ./allure-report
+  artifacts:
+    paths:
+      - ./allure-report
+    expire_in: 1 week
+  rules:
+    - when: manual
