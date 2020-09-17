@@ -16,7 +16,6 @@ describe('dadata api tests', () =>{
             "required": ["value", "unrestricted_value"]};
         const r = await axios.get('/iplocate/address?ip=46.226.227.20');
         const a = ajv.validate(shema, r.data.location);
-        console.log(r.data.location.unrestricted_value);
         expect(r.status).toBe(200);
         assert.deepEqual(a, true);
     });
@@ -24,7 +23,6 @@ describe('dadata api tests', () =>{
     test('dadata find post station', async () => {
         const query = { "lat": 55.878, "lon": 37.653, "radius_meters": 1000 }
         const r = await axios.post('geolocate/postal_unit', query);
-        console.log(r.data);
         expect(r.status).toBe(200);
     });
 
@@ -36,7 +34,6 @@ describe('dadata api tests', () =>{
         const query = {query: '9705100963'};
         const r = await axios.post('/suggest/party', query);
         const a = ajv.validate(shema, r.data);
-        console.log(r.data);
         expect(r.status).toBe(200);
         assert.deepEqual(a, true);
     });
@@ -49,7 +46,6 @@ describe('dadata api tests', () =>{
         const query = {query: 'FORD'};
         const r = await axios.post('findById/car_brand', query);
         const a = ajv.validate(shema, r.data);
-        console.log(r.data.suggestions);
         expect(r.status).toBe(200);
         assert.deepEqual(a, true);
     });
@@ -62,7 +58,6 @@ describe('dadata api tests', () =>{
         const query = {query: 'Бабушкинская'};
         const r = await axios.post('suggest/metro', query);
         const a = ajv.validate(shema, r.data);
-        console.log(r.data.suggestions);
         expect(r.status).toBe(200);
         assert.deepEqual(a, true);
     });
