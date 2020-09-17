@@ -25,6 +25,7 @@ allure_job:
     - allure generate -c ./allure-results -o ./allure-report
   artifacts:
     paths:
+      - ./allure-results
       - ./allure-report
     expire_in: 1 week
   rules:
