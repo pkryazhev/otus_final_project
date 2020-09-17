@@ -7,7 +7,7 @@ describe('online bank test', () => {
     let browser;
 
     beforeEach(async () => {
-        browser = await chromium.launch();
+        browser = await chromium.launch({headless: true, args: ['--no-sandbox']});
         page = await browser.newPage();
         await page.goto('https://idemo.bspb.ru/');
         await page.waitForSelector('#login-button');
@@ -19,7 +19,7 @@ describe('online bank test', () => {
 
     afterEach(async () =>{
         const screenshotBuffer = await page.screenshot();
-        reporter.addAttachment("Screenshot", screenshotBuffer, "image/png");
+        await reporter.addAttachment("Screenshot", screenshotBuffer, "image/png");
         await browser.close();
     });
 

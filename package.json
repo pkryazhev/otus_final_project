@@ -4,7 +4,7 @@
   "description": "Курсовой проект для курса otus Автоматизация тестирования на js",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest -i"
   },
   "keywords": [
     "playwroght",
