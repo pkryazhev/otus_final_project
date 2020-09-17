@@ -25,7 +25,7 @@ describe('dadata api tests', () =>{
         const query = { "lat": 55.878, "lon": 37.653, "radius_meters": 1000 }
         const r = await axios.post('geolocate/postal_unit', query);
         console.log(r.data);
-        expect(r.status).toBe(201);
+        expect(r.status).toBe(200);
     });
 
     test('dadata get info by inn', async () => {

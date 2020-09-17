@@ -12,13 +12,12 @@ describe('online bank test', () => {
         await page.goto('https://idemo.bspb.ru/');
         await page.waitForSelector('#login-button');
         await page.click('#login-button');
-        await page.waitForSelector('#otp-codea');
+        await page.waitForSelector('#otp-code');
         await page.click('#login-otp-button');
         await page.waitForSelector('div.navbar');
     });
 
     afterEach(async () =>{
-        const screenshotBuffer = await page.screenshot();
         await browser.close();
     });
 
