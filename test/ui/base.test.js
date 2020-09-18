@@ -9,7 +9,7 @@ describe('online bank test', () => {
     beforeEach(async () => {
         browser = await chromium.launch({headless: true, args: ['--no-sandbox']});
         page = await browser.newPage();
-        await page.goto('https://idemo.bspb.ru/');
+        await page.goto(process.env.TEST_URL);
         await page.waitForSelector('#login-button');
         await page.click('#login-button');
         await page.waitForSelector('#otp-code');
