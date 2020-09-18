@@ -1,5 +1,6 @@
 const { chromium } = require('playwright');
 const utils = require('../../src/utils');
+const config = require('/jest.config')
 
 describe('online bank test', () => {
 
@@ -9,7 +10,7 @@ describe('online bank test', () => {
     beforeEach(async () => {
         browser = await chromium.launch({headless: true, args: ['--no-sandbox']});
         page = await browser.newPage();
-        await page.goto(process.env.TEST_URL);
+        await page.goto(config.testURL);
         await page.waitForSelector('#login-button');
         await page.click('#login-button');
         await page.waitForSelector('#otp-code');
