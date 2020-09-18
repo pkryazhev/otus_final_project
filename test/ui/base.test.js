@@ -1,6 +1,5 @@
 const { chromium } = require('playwright');
-const utils = require('../../src/utils');
-const config = require('/jest.config')
+const config = require('./../../jest.config')
 
 describe('online bank test', () => {
 
