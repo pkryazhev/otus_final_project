@@ -7,7 +7,7 @@ stages:
 
 tests:
   stage: test
-  image: sglgitlab.soglasie.ru:5000/b2b/frontend/sogins-ng/build:latest
+  image: mcr.microsoft.com/playwright:bionic
   script:
     - npm install # This should install playwright
     - npm run test
