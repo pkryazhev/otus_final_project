@@ -4,7 +4,7 @@ let Ajv= require('ajv');
 
 describe('dadata api tests', () =>{
     axios.defaults.baseURL = 'https://suggestions.dadata.ru/suggestions/api/4_1/rs/';
-    axios.defaults.headers.common['Authorization'] = 'Token 959e434f97b7a005867e5066421a306281c965fc'; //подставьте сюда свой токен
+    axios.defaults.headers.common['Authorization'] = 'Token '; //подставьте сюда свой токен
     const ajv = new Ajv({$data: true, logger: console, allErrors: true, verbose: true});
     let shema;
 
