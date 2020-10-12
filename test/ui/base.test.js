@@ -1,6 +1,11 @@
 const { chromium } = require('playwright');
-const authorizationComponent = require('../../src/authorizationComponent');
-const utils = require('../../src/utils')
+const authorizationComponent = require('../../src/components/authorizationComponent');
+const utils = require('../../src/utils');
+const statementComponent = require('../../src/components/statementComponent');
+const paymentComponent = require('../../src/components/paymentComponent');
+const cardComponent = require('../../src/components/cardComponents');
+const depositComponent = require('../../src/components/depositComponents');
+const userComponent = require('../../src/components/userComponent');
 
 describe('online bank test', () => {
 
@@ -20,46 +25,32 @@ describe('online bank test', () => {
     });
 
     test('statement test', async () => {
-        await page.mouse.move(130, 115);
-        await utils.click(page, '//a[text()=\'Выписка\']');
-        await page.waitForSelector('#statement-page');
-        await page.click('//a[text()=\'Прошлый месяц\']');
-        await utils.click(page, '#query-button')
-        await page.waitForSelector('.statement-container');
+        await statementComponent.goToStatement(page);
+        await statementComponent.setStatementFilter(page);
+        expect(`Период: ${utils.getCurrentDate()} - ${utils.getCurrentDate()}`).toEqual(await utils.getText(page, '.statement-header > div:nth-child(3)'));
     });
 
     test('payment test', async () => {
-        await page.click('#payments');
-        await utils.click(page, '[title=\'За мобильный жены\']')
-        await utils.fill(page, '.input-small.amount', '500')
+        await paymentComponent.goToMobilePayment(page);
+        await paymentComponent.setMobilePaymentFields(page);
         expect('50.00 ₽').toEqual(await utils.getText(page, 'span#fee-amount'));
     });
 
-    test('add card test', async () =>{
-        await page.click('#cards-overview-index');
-        await utils.click(page,'a#order-new-card-link');
-        await page.waitForSelector('select#type-select');
-        await page.selectOption('select#type-select', {index: 8});
-        await utils.click(page,'[data-debit-card-event=\'formSubmissionSuccess_travelp\']');
-        await page.waitForSelector('select#card-branch[size=\'1\']');
-        await page.selectOption('select#card-branch[size=\'1\']', {index: 2});
-        await page.waitForSelector('//button[text()=\'Заказать\']');
+    test('add card test', async () => {
+        await cardComponent.goToCardPage(page);
+        await cardComponent.addNewCard(page);
+        expect('Заказать').toEqual(await utils.getText(page, '//button[text()=\'Заказать\']'));
     });
 
-    test('deposit info test', async () =>{
-        await utils.click(page,'#deposits-index');
-        await utils.click(page,'#account-10032');
-        await page.waitForSelector('#deposit-details');
+    test('deposit info test', async () => {
+        await depositComponent.goToDeposit(page);
+        expect(utils.getCurrentDate()).toEqual(await utils.getText(page, '#deposit-orderDate > div > span'));
     });
 
-    test('order cash test', async () =>{
-        await page.click('.filter-option.pull-left');
-        await utils.click(page, '//span[contains(text(), \'Коудборн\')]');
-        await utils.click(page, '//a[contains(text(), \'Закрыть\')]');
-        await page.mouse.move(130, 115);
-        await utils.click(page, '//a[text()=\'Касса\']');
-        await utils.click(page, '#new-cash-application');
-        await utils.fill(page, '.input-small.amount', '1000000');
-        await page.waitForSelector('#forward');
+    test('order cash test', async () => {
+        await userComponent.switchToULUser(page);
+        await statementComponent.goToCashbox(page);
+        await statementComponent.addNewCashWithdrawal(page);
+        expect('Подтверждение заявки на бронирование ').toEqual(await utils.getText(page, '.page-header > h1'));
     })
 });

@@ -1,7 +1,12 @@
 //Методы, связанные с авторизацией
 
-const config = require('../jest.config');
+const config = require('../../jest.config');
 
+
+/**
+ * Открытие страницы авторизации и вход в систему
+ * @param page - текущая страница
+ */
 exports.authorization = async (page) => {
     await page.goto(config.testURL);
     await page.waitForSelector('#login-button');
